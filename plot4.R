@@ -22,12 +22,27 @@ head(data)
 library(datasets)
 png(file="plot4.png")
 Sys.setlocale("LC_TIME", "English")
+par(mfrow=c(2,2))
 
+### plot4.1
+with(data, plot(Time,Global_active_power,xlab="",ylab="Global Active Power",type="n"))
+with(data, lines(Time,Global_active_power))
+
+### plot4.2
+with(data, plot(Time,Voltage,xlab="datetime",ylab="Voltage",type="n"))
+with(data, lines(Time,Voltage))
+
+### plot4.3
 MaxSubMetering = with(data, pmax(Sub_metering_1,Sub_metering_2,Sub_metering_3))
 with(data, plot(Time,MaxSubMetering,xlab="",ylab="Energy sub metering",bg="white",type="n"))
 with(data, lines(Time,Sub_metering_1))
 with(data, lines(Time,Sub_metering_2, col="red"))
 with(data, lines(Time,Sub_metering_3, col="blue"))
-legend("topright", col=c("black","blue","red"),lty=1,
+legend("topright", col=c("black","blue","red"),lty=1,bty="n",
        legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+
+### plot4.4
+with(data, plot(Time,Global_reactive_power,xlab="datetime",type="n"))
+with(data, lines(Time,Global_reactive_power))
+
 dev.off()
